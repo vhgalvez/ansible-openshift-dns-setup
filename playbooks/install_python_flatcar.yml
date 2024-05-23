@@ -1,11 +1,20 @@
+# playbooks/install_python_flatcar.yml
 - name: Install Python using Docker on Flatcar nodes
   hosts: flatcar_nodes
   become: true
   tasks:
+    - name: Ensure Docker is installed
+      raw: |
+        if ! command -v docker &> /dev/null; then
+          curl -fsSL https://get.docker.com | sh
+        fi
+
     - name: Pull Python Docker image
       raw: docker pull python:3.9-slim
 
-    - name: Create symlink for python3
+    - name: Create Python3 symlink using Docker
       raw: |
         mkdir -p /opt/bin
-        ln -s /usr/bin/docker /opt/bin/python3
+        echo '#!/bin/sh' > /opt/bin/python3
+        echo 'exec docker run --rm -v /usr/bin:/usr/bin python:3.9-slim python3 "$@"' >> /opt/bin/python3
+        chmod +x /opt/bin/python3
