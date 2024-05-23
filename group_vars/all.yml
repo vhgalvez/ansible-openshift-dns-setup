@@ -1,6 +1,4 @@
 # group_vars/all.yml
 dns_servers:
   - 10.17.3.11
-dns_search_domains: example.com
-dns_server1: 10.17.3.11
-dns_server2: 8.8.8.8
+  - 8.8.8.8

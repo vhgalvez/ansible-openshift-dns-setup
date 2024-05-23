@@ -1,2 +1,4 @@
 # group_vars/flatcar_nodes.yml
-ansible_python_interpreter: "/opt/bin/python3"
+dns_servers:
+  - 10.17.3.11
+  - 8.8.8.8
