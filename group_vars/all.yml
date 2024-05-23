@@ -1,7 +1,3 @@
-dns_servers:
-  - 10.17.3.11
-  - 8.8.8.8
-
 dns_entries:
   - name: bootstrap.localcefas.com
     address: 10.17.4.20
