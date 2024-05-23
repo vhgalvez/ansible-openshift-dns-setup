@@ -1,0 +1,16 @@
+[kube_network_01]
+bastion1 ansible_host=192.168.0.20 ansible_connection=ssh ansible_network_interface=enp3s0f1
+
+[kube_network_02]
+freeipa1 ansible_host=10.17.3.11
+load_balancer1 ansible_host=10.17.3.12
+postgresql1 ansible_host=10.17.3.13
+
+[kube_network_03]
+bootstrap1 ansible_host=10.17.4.20
+master1 ansible_host=10.17.4.21
+master2 ansible_host=10.17.4.22
+master3 ansible_host=10.17.4.23
+worker1 ansible_host=10.17.4.24
+worker2 ansible_host=10.17.4.25
+worker3 ansible_host=10.17.4.26

@@ -1,0 +1,25 @@
+---
+- name: Crear configuración de NetworkManager
+  template:
+    src: dns.conf.j2
+    dest: /etc/NetworkManager/conf.d/dns.conf
+
+- name: Configurar NetworkManager para no gestionar resolv.conf
+  lineinfile:
+    path: /etc/NetworkManager/NetworkManager.conf
+    regexp: '^\\[main\\]'
+    line: '[main]\nrc-manager=unmanaged'
+    state: present
+
+- name: Configurar resolv.conf
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+
+- name: Proteger resolv.conf contra modificaciones
+  command: chattr +i /etc/resolv.conf
+
+- name: Reiniciar NetworkManager
+  systemd:
+    name: NetworkManager
+    state: restarted
