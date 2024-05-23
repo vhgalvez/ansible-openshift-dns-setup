@@ -1,5 +1,5 @@
 ---
-- name: Configurar DNS en máquinas virtuales
+- name: Configure DNS on all nodes
   hosts: all
   become: yes
   roles:
