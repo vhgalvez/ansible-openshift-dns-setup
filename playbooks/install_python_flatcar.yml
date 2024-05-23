@@ -1,26 +1,24 @@
-# playbooks/install_python_flatcar.yml
-- name: Install Docker and Python using Docker on Flatcar nodes
+# playbooks/setup_dns_flatcar.yml
+- name: Configure DNS on Flatcar nodes
   hosts: flatcar_nodes
   become: true
   gather_facts: no
   tasks:
-    - name: Ensure Docker is installed
+    - name: Apply NetworkManager configuration
       raw: |
-        if ! command -v docker &> /dev/null; then
-          curl -fsSL https://get.docker.com | sh
-        fi
+        cat <<EOF > /etc/NetworkManager/conf.d/dns.conf
+        [main]
+        dns=none
+        EOF
 
-    - name: Start Docker service
+    - name: Update resolv.conf
       raw: |
-        sudo systemctl enable docker
-        sudo systemctl start docker
+        cat <<EOF > /etc/resolv.conf
+        nameserver 10.17.3.11
+        EOF
 
-    - name: Pull Python Docker image
-      raw: docker pull python:3.9-slim
+    - name: Make resolv.conf immutable
+      raw: chattr +i /etc/resolv.conf
 
-    - name: Create Python3 symlink using Docker
-      raw: |
-        mkdir -p /opt/bin
-        echo '#!/bin/sh' > /opt/bin/python3
-        echo 'exec docker run --rm -v /:/host -w /host python:3.9-slim python3 "$@"' >> /opt/bin/python3
-        chmod +x /opt/bin/python3
+    - name: Restart NetworkManager
+      raw: systemctl restart NetworkManager
