@@ -15,3 +15,7 @@
   become: yes
   roles:
     - dns_config
+  tasks:
+    - name: Debug dns_servers variable
+      debug:
+        var: dns_servers
