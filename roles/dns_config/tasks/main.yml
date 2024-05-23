@@ -1,5 +1,4 @@
 # roles/dns_config/tasks/main.yml
-
 - name: Apply NetworkManager configuration for Rocky Linux
   when: ansible_distribution == 'Rocky'
   template:
@@ -22,7 +21,6 @@
 - name: Make resolv.conf immutable
   command: chattr +i /etc/resolv.conf
 
-# Handlers
 - name: Restart NetworkManager Rocky
   when: ansible_distribution == 'Rocky'
   command: systemctl restart NetworkManager

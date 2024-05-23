@@ -2,8 +2,3 @@
 
 [main]
 dns=none
-
-[resolve]
-{% for server in dns_servers %}
-DNS={{ server }}
-{% endfor %}

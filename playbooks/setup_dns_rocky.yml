@@ -1,13 +1,7 @@
-# playbooks/setup_dns.yml
+# playbooks/setup_dns_rocky.yml
 ---
 - name: Configure DNS on Rocky Linux nodes
   hosts: rocky_nodes
-  become: yes
-  roles:
-    - dns_config
-
-- name: Configure DNS on Flatcar Linux nodes
-  hosts: flatcar_nodes
   become: yes
   roles:
     - dns_config
