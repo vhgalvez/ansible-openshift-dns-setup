@@ -25,14 +25,13 @@ Este repositorio contiene playbooks de Ansible para configurar el DNS en un clú
   
 2. Configura el archivo de inventario (inventory/hosts) con las IPs de tus máquinas virtuales.
 
-
 3. Instala Python en los nodos Flatcar usando Docker:
 
 ```bash
 sudo ansible-playbook -i inventory/hosts playbooks/install_python_flatcar.yml
-``` 
+```
 
-4.  Configura el DNS en los nodos Flatcar:
+4. Configura el DNS en los nodos Flatcar:
 
   ```bash
   sudo ansible-playbook -i inventory/hosts playbooks/setup_dns_flatcar.yml
@@ -40,4 +39,4 @@ sudo ansible-playbook -i inventory/hosts playbooks/install_python_flatcar.yml
 
 ## Mantenedor
 
-Victor Galvez https://github.com/vhgalvez
+Victor Galvez [https://github.com/vhgalvez](https://github.com/vhgalvez)
