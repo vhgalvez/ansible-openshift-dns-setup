@@ -1,5 +1,4 @@
 # roles/dns_config/tasks/main.yml
----
 - name: Apply NetworkManager configuration
   template:
     src: dns.conf.j2

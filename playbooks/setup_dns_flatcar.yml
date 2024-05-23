@@ -1,26 +1,8 @@
+# playbooks/setup_dns_flatcar.yml
 ---
 - name: Configure DNS on Flatcar nodes
   hosts: flatcar_nodes
   become: yes
   gather_facts: no
-  tasks:
-    - name: Apply NetworkManager configuration
-      template:
-        src: dns.conf.j2
-        dest: /etc/NetworkManager/conf.d/dns.conf
-        mode: "0644"
-
-    - name: Update resolv.conf
-      template:
-        src: resolv.conf.j2
-        dest: /etc/resolv.conf
-        mode: "0644"
-
-    - name: Make resolv.conf immutable
-      command: chattr +i /etc/resolv.conf
-
-    - name: Restart NetworkManager
-      systemd:
-        name: NetworkManager
-        state: restarted
-        enabled: yes
+  roles:
+    - dns_config
