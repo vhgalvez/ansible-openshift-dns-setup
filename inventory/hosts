@@ -14,3 +14,6 @@ master3 ansible_host=10.17.4.23
 worker1 ansible_host=10.17.4.24
 worker2 ansible_host=10.17.4.25
 worker3 ansible_host=10.17.4.26
+
+[flatcar_nodes:children]
+kube_network_03

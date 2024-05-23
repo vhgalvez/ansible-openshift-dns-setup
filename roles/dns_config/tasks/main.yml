@@ -1,18 +1,15 @@
----
 - name: Apply NetworkManager configuration
   template:
     src: dns.conf.j2
     dest: /etc/NetworkManager/conf.d/dns.conf
 
-- name: Apply resolv.conf configuration
+- name: Update resolv.conf
   template:
     src: resolv.conf.j2
     dest: /etc/resolv.conf
 
-- name: Set immutable attribute on resolv.conf
+- name: Make resolv.conf immutable
   command: chattr +i /etc/resolv.conf
 
 - name: Restart NetworkManager
-  systemd:
-    name: NetworkManager
-    state: restarted
+  command: systemctl restart NetworkManager

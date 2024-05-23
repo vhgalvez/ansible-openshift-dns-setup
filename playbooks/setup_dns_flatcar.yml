@@ -1,44 +1,19 @@
----
-- name: Configure DNS and Install Python on Flatcar nodes
-  hosts: kube_network_03
-  gather_facts: no
-  become: yes
+- name: Configure DNS on Flatcar nodes
+  hosts: flatcar_nodes
+  become: true
   tasks:
-    - name: Install Python using raw module (Flatcar nodes)
-      raw: |
-        sudo su -c 'wget https://bootstrap.pypa.io/get-pip.py'
-        sudo su -c 'python3 get-pip.py'
-        sudo su -c 'pip3 install ansible'
+    - name: Apply NetworkManager configuration
+      template:
+        src: dns.conf.j2
+        dest: /etc/NetworkManager/conf.d/dns.conf
 
-    - name: Ensure Python is installed
-      command: which python3
-      register: python3_path
-      changed_when: false
+    - name: Update resolv.conf
+      template:
+        src: resolv.conf.j2
+        dest: /etc/resolv.conf
 
-    - name: Configure DNS using raw module (Flatcar nodes)
-      raw: |
-        echo "[Match]
-        Name=*
+    - name: Make resolv.conf immutable
+      command: chattr +i /etc/resolv.conf
 
-        [Network]
-        DNS=10.17.3.11
-        Domains=localcefas.com" | sudo tee /etc/systemd/network/10-static-dns.network
-
-    - name: Create resolved configuration for DNS
-      raw: |
-        echo "[Resolve]
-        DNS=10.17.3.11
-        Domains=localcefas.com" | sudo tee /etc/systemd/resolved.conf
-
-    - name: Restart systemd-networkd
-      raw: sudo systemctl restart systemd-networkd
-
-    - name: Restart systemd-resolved
-      raw: sudo systemctl restart systemd-resolved
-
-    - name: Verify DNS configuration
-      raw: resolvectl status
-      register: resolvectl_output
-
-    - debug:
-        var: resolvectl_output.stdout
+    - name: Restart NetworkManager
+      command: systemctl restart NetworkManager

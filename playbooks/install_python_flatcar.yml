@@ -1,18 +1,11 @@
----
-- name: Install Python on Flatcar nodes
-  hosts: kube_network_03
-  gather_facts: no
-  become: yes
+- name: Install Python using Docker on Flatcar nodes
+  hosts: flatcar_nodes
+  become: true
   tasks:
-    - name: Install Python using raw module
+    - name: Pull Python Docker image
+      raw: docker pull python:3.9-slim
+
+    - name: Create symlink for python3
       raw: |
-        sudo su -c 'wget https://bootstrap.pypa.io/get-pip.py'
-        sudo su -c 'python3 get-pip.py'
-        sudo su -c 'pip3 install ansible'
-
-    - name: Ensure Python is installed
-      command: which python3
-      register: python3_path
-
-    - debug:
-        var: python3_path.stdout
+        mkdir -p /opt/bin
+        ln -s /usr/bin/docker /opt/bin/python3
