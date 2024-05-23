@@ -18,3 +18,7 @@ worker3 ansible_host=10.17.4.26 ansible_python_interpreter='/opt/bin/python3'
 
 [flatcar_nodes:children]
 kube_network_03
+
+[rocky_nodes:children]
+kube_network_01
+kube_network_02
