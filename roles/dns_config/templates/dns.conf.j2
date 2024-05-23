@@ -1,6 +1,17 @@
-# templates/dns.conf.j2
+# roles/dns_config/templates/dns.conf.j2
 [main]
 dns=none
 
-[global-dns-domain]
-servers={{ dns_servers | join(',') }}
+[resolve]
+# Add DNS servers
+{% for server in dns_servers %}
+DNS={{ server }}
+{% endfor %}
+
+# Add static DNS entries
+{% for entry in dns_entries %}
+LLMNR=false
+MulticastDNS=false
+DNSStubListener=no
+FallbackDNS={{ entry.address }}
+{% endfor %}

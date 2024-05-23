@@ -1,4 +1,5 @@
 # roles/dns_config/tasks/main.yml
+
 - name: Apply NetworkManager configuration for Rocky Linux
   when: ansible_distribution == 'Rocky'
   template:
@@ -20,13 +21,3 @@
 
 - name: Make resolv.conf immutable
   command: chattr +i /etc/resolv.conf
-
-- name: Restart NetworkManager Rocky
-  when: ansible_distribution == 'Rocky'
-  command: systemctl restart NetworkManager
-  listen: Restart NetworkManager Rocky
-
-- name: Restart NetworkManager Flatcar
-  when: ansible_distribution == 'Flatcar Container Linux by Kinvolk'
-  command: systemctl restart systemd-networkd
-  listen: Restart NetworkManager Flatcar

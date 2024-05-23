@@ -1,0 +1,9 @@
+# roles/dns_config/handlers/main.yml
+
+- name: Restart NetworkManager Rocky
+  when: ansible_distribution == 'Rocky'
+  command: systemctl restart NetworkManager
+
+- name: Restart NetworkManager Flatcar
+  when: ansible_distribution == 'Flatcar Container Linux by Kinvolk'
+  command: systemctl restart systemd-networkd

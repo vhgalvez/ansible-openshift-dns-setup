@@ -1,4 +1,30 @@
 # group_vars/all.yml
 dns_servers:
-  - 10.17.3.11
   - 8.8.8.8
+  - 8.8.4.4
+
+dns_entries:
+  - name: bootstrap.localcefas.com
+    address: 10.17.4.20
+  - name: master1.localcefas.com
+    address: 10.17.4.21
+  - name: master2.localcefas.com
+    address: 10.17.4.22
+  - name: master3.localcefas.com
+    address: 10.17.4.23
+  - name: worker1.localcefas.com
+    address: 10.17.4.24
+  - name: worker2.localcefas.com
+    address: 10.17.4.25
+  - name: worker3.localcefas.com
+    address: 10.17.4.26
+  - name: bastion.localcefas.com
+    address: 192.168.0.20
+  - name: freeipa.localcefas.com
+    address: 10.17.3.11
+  - name: lb.localcefas.com
+    address: 10.17.3.12
+  - name: db.localcefas.com
+    address: 10.17.3.13
+  - name: bastion1.localcefas.com
+    address: 192.168.0.20
