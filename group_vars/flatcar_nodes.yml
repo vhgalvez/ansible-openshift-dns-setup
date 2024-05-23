@@ -1,0 +1,2 @@
+# group_vars/flatcar_nodes.yml
+ansible_python_interpreter: "/opt/bin/python3"
