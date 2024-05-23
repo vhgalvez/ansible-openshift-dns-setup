@@ -2,8 +2,9 @@
 - name: Install Docker and Python using Docker on Flatcar nodes
   hosts: flatcar_nodes
   become: true
+  gather_facts: no
   tasks:
-    - name: Install Docker
+    - name: Ensure Docker is installed
       raw: |
         if ! command -v docker &> /dev/null; then
           curl -fsSL https://get.docker.com | sh
