@@ -3,19 +3,15 @@
   template:
     src: dns.conf.j2
     dest: /etc/NetworkManager/conf.d/dns.conf
-    mode: '0644'
+  notify: Restart NetworkManager
 
 - name: Update resolv.conf
   template:
     src: resolv.conf.j2
     dest: /etc/resolv.conf
-    mode: '0644'
 
 - name: Make resolv.conf immutable
   command: chattr +i /etc/resolv.conf
 
 - name: Restart NetworkManager
-  systemd:
-    name: NetworkManager
-    state: restarted
-    enabled: yes
+  command: systemctl restart NetworkManager
