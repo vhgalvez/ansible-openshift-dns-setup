@@ -1,0 +1,18 @@
+---
+- name: Install Python on Flatcar nodes
+  hosts: kube_network_03
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: Install Python using raw module
+      raw: |
+        sudo su -c 'wget https://bootstrap.pypa.io/get-pip.py'
+        sudo su -c 'python3 get-pip.py'
+        sudo su -c 'pip3 install ansible'
+
+    - name: Ensure Python is installed
+      command: which python3
+      register: python3_path
+
+    - debug:
+        var: python3_path.stdout
