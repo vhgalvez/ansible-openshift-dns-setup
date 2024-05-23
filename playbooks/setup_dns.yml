@@ -1,6 +1,6 @@
 ---
 - name: Configure DNS on all nodes
-  hosts: all
+  hosts: rocky_nodes
   become: yes
   roles:
     - dns_config
