@@ -7,10 +7,3 @@ dns=none
 {% for server in dns_servers %}
 DNS={{ server }}
 {% endfor %}
-
-{% for entry in dns_entries %}
-LLMNR=false
-MulticastDNS=false
-DNSStubListener=no
-FallbackDNS={{ entry.address }}
-{% endfor %}
