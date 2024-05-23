@@ -5,3 +5,13 @@
   become: yes
   roles:
     - dns_config
+  tasks:
+    - name: Debug dns_servers variable
+      debug:
+        var: dns_servers
+
+- name: Configure DNS on Flatcar Linux nodes
+  hosts: flatcar_nodes
+  become: yes
+  roles:
+    - dns_config
