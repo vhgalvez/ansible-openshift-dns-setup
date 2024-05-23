@@ -17,24 +17,27 @@ Este repositorio contiene playbooks de Ansible para configurar el DNS en un clú
 ## Uso
 
 1. Clona este repositorio:
-
-   ```bash
-   git clone https://github.com/vhgalvez/ansible-openshift-dns-setup.git
-   cd ansible-openshift-dns-setup
+  
+  ```bash
+  git clone https://github.com/vhgalvez/ansible-openshift-dns-setup.git
+  cd ansible-openshift-dns-setup
   ```
+  
+2. Configura el archivo de inventario (inventory/hosts) con las IPs de tus máquinas virtuales.
 
-2.Configura el archivo de inventario (inventory/hosts) con las IPs de tus máquinas virtuales.
 
 3. Instala Python en los nodos Flatcar usando Docker:
 
+```bash
+sudo ansible-playbook -i inventory/hosts playbooks/install_python_flatcar.yml
+``` 
 
-4. Configura el DNS en los nodos Flatcar:
+4.  Configura el DNS en los nodos Flatcar:
 
-   ```bash
+  ```bash
   sudo ansible-playbook -i inventory/hosts playbooks/setup_dns_flatcar.yml
-   ```
-
+  ```
 
 ## Mantenedor
 
-Victor Galvez
+Victor Galvez https://github.com/vhgalvez
