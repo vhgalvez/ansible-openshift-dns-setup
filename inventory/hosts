@@ -1,16 +1,16 @@
 [kube_network_01]
-bastion1 ansible_host=192.168.0.20 ansible_connection=ssh ansible_network_interface=enp3s0f1
+bastion1 ansible_host=192.168.0.20 ansible_connection=ssh ansible_network_interface=enp3s0f1 ansible_python_interpreter=/usr/bin/python3
 
 [kube_network_02]
-freeipa1 ansible_host=10.17.3.11
-load_balancer1 ansible_host=10.17.3.12
-postgresql1 ansible_host=10.17.3.13
+freeipa1 ansible_host=10.17.3.11 ansible_python_interpreter=/usr/bin/python3
+load_balancer1 ansible_host=10.17.3.12 ansible_python_interpreter=/usr/bin/python3
+postgresql1 ansible_host=10.17.3.13 ansible_python_interpreter=/usr/bin/python3
 
 [kube_network_03]
-bootstrap1 ansible_host=10.17.4.20
-master1 ansible_host=10.17.4.21
-master2 ansible_host=10.17.4.22
-master3 ansible_host=10.17.4.23
-worker1 ansible_host=10.17.4.24
-worker2 ansible_host=10.17.4.25
-worker3 ansible_host=10.17.4.26
+bootstrap1 ansible_host=10.17.4.20 ansible_python_interpreter=/usr/bin/python3
+master1 ansible_host=10.17.4.21 ansible_python_interpreter=/usr/bin/python3
+master2 ansible_host=10.17.4.22 ansible_python_interpreter=/usr/bin/python3
+master3 ansible_host=10.17.4.23 ansible_python_interpreter=/usr/bin/python3
+worker1 ansible_host=10.17.4.24 ansible_python_interpreter=/usr/bin/python3
+worker2 ansible_host=10.17.4.25 ansible_python_interpreter=/usr/bin/python3
+worker3 ansible_host=10.17.4.26 ansible_python_interpreter=/usr/bin/python3
