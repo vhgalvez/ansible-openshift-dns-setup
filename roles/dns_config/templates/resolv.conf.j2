@@ -1,4 +1,5 @@
 # roles/dns_config/templates/resolv.conf.j2
+
 {% for server in dns_servers %}
 nameserver {{ server }}
 {% endfor %}

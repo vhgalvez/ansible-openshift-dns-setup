@@ -1,14 +1,13 @@
 # roles/dns_config/templates/dns.conf.j2
+
 [main]
 dns=none
 
 [resolve]
-# Add DNS servers
 {% for server in dns_servers %}
 DNS={{ server }}
 {% endfor %}
 
-# Add static DNS entries
 {% for entry in dns_entries %}
 LLMNR=false
 MulticastDNS=false
