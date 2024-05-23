@@ -28,3 +28,7 @@
 - name: Restart NetworkManager Flatcar
   when: ansible_distribution == 'Flatcar Container Linux by Kinvolk'
   command: systemctl restart systemd-networkd
+  
+- name: Debug dns_servers variable
+  debug:
+    var: dns_servers

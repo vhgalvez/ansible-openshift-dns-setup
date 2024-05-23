@@ -1,8 +1,7 @@
 # group_vars/all.yml
-
 dns_servers:
+  - 10.17.3.11
   - 8.8.8.8
-  - 8.8.4.4
 
 dns_entries:
   - name: bootstrap.localcefas.com
